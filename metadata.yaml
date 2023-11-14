@@ -2,5 +2,5 @@ homepage: "https://notifly.tech/"
 documentation: "https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk"
 versions:
   # Latest version
-  - sha: 
+  - sha: bef69881b5a5e2ff268afa00a580915c302d35a2
     changeNotes: Initial release.
