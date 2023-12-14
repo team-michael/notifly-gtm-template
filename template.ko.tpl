@@ -23,7 +23,7 @@ ___INFO___
     "PERSONALIZATION"
   ],
   "displayName": "Notifly Javascript SDK",
-  "description": "The tag utilizes the Notifly Javascript SDK. Check more details from \u003ca herf\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk\"\u003ehere\u003c/a\u003e.",
+  "description": "Notifly Javascript SDK 적용을 위한 태그. 자세항 사항은 \u003ca herf\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk\"\u003e링크\u003c/a\u003e를 참고해주세요.",
   "containerContexts": [
     "WEB"
   ],
@@ -41,23 +41,23 @@ ___TEMPLATE_PARAMETERS___
   {
     "selectItems": [
       {
-        "displayValue": "Initialize (initialize)",
+        "displayValue": "SDK 초기화 (initialize)",
         "value": "initialize"
       },
       {
-        "displayValue": "Set User ID (setUserId)",
+        "displayValue": "유저 아이디 등록 (setUserId)",
         "value": "setUserId"
       },
       {
-        "displayValue": "Set User Properties (setUserProperties)",
+        "displayValue": "유저 속성 등록 (setUserProperties)",
         "value": "setUserProperties"
       },
       {
-        "displayValue": "Delete User (deleteUser)",
+        "displayValue": "유저 삭제 (deleteUser)",
         "value": "deleteUser"
       },
       {
-        "displayValue": "Track Event (trackEvent)",
+        "displayValue": "이벤트 로깅 (trackEvent)",
         "value": "trackEvent"
       }
     ],
@@ -71,7 +71,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "initializeDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#initialize-options\"\u003eInitialize\u003c/a\u003e - This tag sets up Notifly on the page. You only need one Initialize tag, and it should be triggered on All Pages or a similar trigger that fires consistently on each page load.",
+    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#initialize-options\"\u003eSDK 초기화\u003c/a\u003e - Notify SDK를 초기화 합니다. Notifly SDK의 다른 태그들을 사용하기 전에 반드시 먼저 수행 되어야 합니다. 초기화 태그는 페이지당 한번만 실행 되어야 합니다.",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -83,7 +83,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setUserIdDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#set-user-id\"\u003eSet User ID\u003c/a\u003e - This tag sets the ID of the user viewing the page. Setting a user\u0027s id allows them to be tracked across devices. Trigger this tag once the user can be uniquely identified, e.g. once they login.",
+    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#set-user-id\"\u003e유저 아이디 등록\u003c/a\u003e - 현재 유저의 아이디를 Notifly에 등록 합니다. 유저 아이디를 등록하면 여러 기기에서 사용자를 추적할 수 있습니다. 고유한 유저를 식별될 수 있는 시점에 이 태그를 실행하세요. (예: 로그인).",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -95,7 +95,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setUserPropertiesDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#set-user-properties\"\u003eSet User Properties\u003c/a\u003e - This tag sets properties on the user viewing the page.",
+    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#set-user-properties\"\u003e유저 속성 등록\u003c/a\u003e - 현재 페이지를 방문중인 사용자의 고유 속성을 등록합니다. (예: 전화번호, 이메일, 성별 등)",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -107,7 +107,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "deleteUserDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#delete-user\"\u003eDelete User\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#delete-user\"\u003e사용자 삭제\u003c/a\u003e - 현재 페이지를 방문중인 사용자를 Notifly에서 삭제합니다.",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -119,7 +119,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "trackEventDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#track-event\"\u003eTrack Event\u003c/a\u003e - This tag sends an event to Notifly. Events are actions that users take in your product, such as clicking a button, making a purchase, or signing up for an account.",
+    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#track-event\"\u003e이벤트 로깅\u003c/a\u003e - Notifly에 이벤트를 전송합니다. 이벤트는 버튼 클릭, 구매, 계정 가입 등 유저가 서비스에서 수행하는 작업입니다.",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -198,7 +198,7 @@ ___TEMPLATE_PARAMETERS___
         "type": "EQUALS"
       }
     ],
-    "help": "SDK Version to use. If empty, use latest version."
+    "help": "사용할 SDK을 입력합니다. 비워둘 경우 최신 버전을 사용합니다. \u003ca href\u003d\"https://www.npmjs.com/package/notifly-js-sdk?activeTab=versions\"\u003e(버전 목록)\u003c/a\u003e"
   },
   {
     "enablingConditions": [
@@ -260,7 +260,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "TEXT",
     "name": "userId",
-    "displayName": "User ID",
+    "displayName": "유저 아이디",
     "simpleValueType": true,
     "enablingConditions": [
       {
@@ -278,7 +278,7 @@ ___TEMPLATE_PARAMETERS___
         "paramValue": "setUserProperties"
       }
     ],
-    "displayName": "UserProperties",
+    "displayName": "유저 속성",
     "name": "setUserProperties",
     "groupStyle": "ZIPPY_OPEN",
     "type": "GROUP",
@@ -289,20 +289,20 @@ ___TEMPLATE_PARAMETERS___
           {
             "valueValidators": [],
             "defaultValue": "",
-            "displayName": "Name",
+            "displayName": "속성 이름",
             "name": "name",
             "isUnique": false,
             "type": "TEXT"
           },
           {
             "defaultValue": "",
-            "displayName": "Value",
+            "displayName": "속성 값",
             "name": "value",
             "type": "TEXT"
           }
         ],
         "type": "SIMPLE_TABLE",
-        "newRowButtonText": "Add Property"
+        "newRowButtonText": "속성 추가"
       }
     ]
   },
@@ -314,7 +314,7 @@ ___TEMPLATE_PARAMETERS___
         "paramValue": "trackEvent"
       }
     ],
-    "displayName": "Event",
+    "displayName": "이벤트",
     "name": "trackEvent",
     "groupStyle": "ZIPPY_OPEN",
     "type": "GROUP",
@@ -325,36 +325,36 @@ ___TEMPLATE_PARAMETERS___
             "type": "NON_EMPTY"
           }
         ],
-        "displayName": "Event Name",
+        "displayName": "이벤트 이름",
         "simpleValueType": true,
         "name": "eventName",
         "type": "TEXT"
       },
       {
-        "displayName": "Event Params",
+        "displayName": "이벤트 변수",
         "name": "eventParams",
         "simpleTableColumns": [
           {
             "defaultValue": "",
-            "displayName": "Event Params",
+            "displayName": "변수 명",
             "name": "name",
             "isUnique": true,
             "type": "TEXT"
           },
           {
             "defaultValue": "",
-            "displayName": "Param Value",
+            "displayName": "변수 값",
             "name": "value",
             "type": "TEXT"
           }
         ],
         "type": "SIMPLE_TABLE",
-        "newRowButtonText": "Add Param"
+        "newRowButtonText": "변수 추가"
       },
       {
         "type": "PARAM_TABLE",
         "name": "segmentationEventParamKeys",
-        "displayName": "Segmentation Event Param Keys",
+        "displayName": "유저 세그먼트 이벤트 변수 목록",
         "paramTableColumns": [
           {
             "param": {
