@@ -402,10 +402,10 @@ const onSuccess = () => {
         username: data.username,
         password: data.password,
         pushSubscriptionOptions: {
-          vapidPublicKey: data.vapidPublicKey,
-          promptDelayMillis: data.promptDelayMillis,
-          askPermission: data.askPermission,
-          serviceWorkerPath: data.serviceWorkerPath,
+          vapidPublicKey: data.vapidPublicKey && undefined,
+          promptDelayMillis: data.promptDelayMillis && undefined,
+          askPermission: data.askPermission && undefined,
+          serviceWorkerPath: data.serviceWorkerPath && undefined,
         },
       });
       break;
@@ -413,7 +413,8 @@ const onSuccess = () => {
       _notifly.setUserId(data.userId);
       break;
     case 'setUserProperties':
-      _notifly.setUserProperties(data.userProperties);
+      const properties = data.userProperties.reduce((current, props) => (current[props.name] = props.value, current), {});
+      _notifly.setUserProperties(properties);
       break;
     case 'deleteUser':
       _notifly.deleteUser();

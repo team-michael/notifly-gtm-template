@@ -1,9 +1,7 @@
 name: Release Templates
 
 on:
-  push:
-    branches:
-      - main  # Replace with your default branch if different
+  workflow_dispatch:
 
 jobs:
   release:
