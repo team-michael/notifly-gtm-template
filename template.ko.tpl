@@ -413,15 +413,16 @@ const onSuccess = () => {
       _notifly.setUserId(data.userId);
       break;
     case 'setUserProperties':
-      const properties = data.userProperties.reduce((current, props) => (current[props.name] = props.value, current), {});
+      const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
       _notifly.setUserProperties(properties);
       break;
     case 'deleteUser':
       _notifly.deleteUser();
       break;
     case 'trackEvent':
+      const eventParams = (data.eventParams || []).reduce((current, params) => (current[params.name] = params.value, current), {});
       const keys = getKeys(data.segmentationEventParamKeys || []);
-      _notifly.trackEvent(data.eventName, data.eventParams, keys);
+      _notifly.trackEvent(data.eventName, eventParams, keys);
       break;
     default:
       break;
