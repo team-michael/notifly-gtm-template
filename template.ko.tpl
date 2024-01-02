@@ -71,7 +71,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "initializeDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#initialize-options\"\u003eSDK 초기화\u003c/a\u003e - Notify SDK를 초기화 합니다. Notifly SDK의 다른 태그들을 사용하기 전에 반드시 먼저 수행 되어야 합니다. 초기화 태그는 페이지당 한번만 실행 되어야 합니다.",
+    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#initialize-options\"\u003eSDK 초기화\u003c/a\u003e - Notify SDK를 초기화 합니다. Notifly SDK의 다른 태그들을 사용하기 전에 반드시 먼저 수행 되어야 합니다. 초기화 태그는 페이지당 한번만 실행 되어야 합니다. \u003cstrong\u003e*SDK Version 2.5.0 이상부터는 SDK가 아래 Advanced Configuration(고급 설정)을 사용하지 않습니다. \u003ca href\u003d\"https://notifly.tech/console/settings\"\u003eNotifly 설정 페이지\u003c/a\u003e \u003e SDK 설정 탭 \u003e 웹사이트 설정 에서 해당 옵션을 설정해주세요.\u003c/strong\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -208,7 +208,7 @@ ___TEMPLATE_PARAMETERS___
         "paramValue": "initialize"
       }
     ],
-    "displayName": "Initialization",
+    "displayName": "Advanced Configurations",
     "name": "initialize",
     "type": "GROUP",
     "subParams": [
@@ -413,15 +413,16 @@ const onSuccess = () => {
       _notifly.setUserId(data.userId);
       break;
     case 'setUserProperties':
-      const properties = data.userProperties.reduce((current, props) => (current[props.name] = props.value, current), {});
+      const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
       _notifly.setUserProperties(properties);
       break;
     case 'deleteUser':
       _notifly.deleteUser();
       break;
     case 'trackEvent':
+      const eventParams = (data.eventParams || []).reduce((current, params) => (current[params.name] = params.value, current), {});
       const keys = getKeys(data.segmentationEventParamKeys || []);
-      _notifly.trackEvent(data.eventName, data.eventParams, keys);
+      _notifly.trackEvent(data.eventName, eventParams, keys);
       break;
     default:
       break;
