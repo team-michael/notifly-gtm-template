@@ -44,3 +44,13 @@ jobs:
           asset_path: ./template.ko.tpl
           asset_name: template.ko.tpl
           asset_content_type: application/octet-stream
+
+      - name: Upload cafe24-custom-event-tracking-template.tpl
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./cafe24-custom-event-tracking-template.tpl
+          asset_name: cafe24-custom-event-tracking-template.tpl
+          asset_content_type: application/octet-stream
