@@ -354,7 +354,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "PARAM_TABLE",
         "name": "segmentationEventParamKeys",
-        "displayName": "유저 세그먼트 이벤트 변수 목록",
+        "displayName": "유저 세그먼팅에 사용될 수 있는 이벤트 패러미터 이름 목록",
         "paramTableColumns": [
           {
             "param": {
@@ -363,9 +363,19 @@ ___TEMPLATE_PARAMETERS___
               "displayName": "",
               "simpleValueType": true
             },
-            "isUnique": false
+            "isUnique": true
           }
-        ]
+        ],
+        "valueValidators": [
+          {
+            "type": "TABLE_ROW_COUNT",
+            "args": [
+              0,
+              1
+            ]
+          }
+        ],
+        "newRowButtonText": "추가하기"
       }
     ]
   }

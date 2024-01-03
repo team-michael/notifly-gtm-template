@@ -354,7 +354,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "PARAM_TABLE",
         "name": "segmentationEventParamKeys",
-        "displayName": "Segmentation Event Param Keys",
+        "displayName": "Set of Keys for User Segmentation",
         "paramTableColumns": [
           {
             "param": {
@@ -363,9 +363,19 @@ ___TEMPLATE_PARAMETERS___
               "displayName": "",
               "simpleValueType": true
             },
-            "isUnique": false
+            "isUnique": true
           }
-        ]
+        ],
+        "valueValidators": [
+          {
+            "type": "TABLE_ROW_COUNT",
+            "args": [
+              0,
+              1
+            ]
+          }
+        ],
+        "newRowButtonText": "Add new key"
       }
     ]
   }
