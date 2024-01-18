@@ -390,7 +390,7 @@ const injectScript = require('injectScript');
 const log = require('logToConsole');
 
 const SDK_VERSION = data.version ? '@' + data.version : '';
-const JS_URL = 'https://cdn.jsdelivr.net/npm/notifly-js-sdk' + SDK_VERSION + '/dist/index.min.js';
+const JS_URL = 'https://cdn.jsdelivr.net/npm/notifly-js-sdk' + SDK_VERSION + '/dist/index.global.min.js';
 const LOG_PREFIX = '[Notifly / GTM] ';
 const NAMESPACE = 'notifly';
 
