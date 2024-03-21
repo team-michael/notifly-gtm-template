@@ -345,7 +345,7 @@ const onSuccess = () => {
       });
       break;
     case 'setUserId':
-      _notifly.setUserId(data.userId);
+      _notifly.setUserId(data.userId?.toString());
       break;
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
