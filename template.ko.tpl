@@ -353,7 +353,11 @@ const onSuccess = () => {
       });
       break;
     case 'setUserId':
-      _notifly.setUserId(data.userId?.toString());
+      if (data.userId) {
+        _notifly.setUserId(data.userId.toString());
+      } else {
+        _notifly.setUserId();
+      }
       break;
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
