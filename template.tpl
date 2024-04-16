@@ -1,12 +1,4 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
@@ -53,10 +45,6 @@ ___TEMPLATE_PARAMETERS___
         "value": "setUserProperties"
       },
       {
-        "displayValue": "Delete User (deleteUser)",
-        "value": "deleteUser"
-      },
-      {
         "displayValue": "Track Event (trackEvent)",
         "value": "trackEvent"
       }
@@ -100,18 +88,6 @@ ___TEMPLATE_PARAMETERS___
       {
         "paramName": "type",
         "paramValue": "setUserProperties",
-        "type": "EQUALS"
-      }
-    ]
-  },
-  {
-    "type": "LABEL",
-    "name": "deleteUserDescription",
-    "displayName": "\u003ca href\u003d\"https://docs.notifly.tech/ko/developer-guide/client-sdk/javascript-sdk#delete-user\"\u003eDelete User\u003c/a\u003e",
-    "enablingConditions": [
-      {
-        "paramName": "type",
-        "paramValue": "deleteUser",
         "type": "EQUALS"
       }
     ]
@@ -198,64 +174,15 @@ ___TEMPLATE_PARAMETERS___
         "type": "EQUALS"
       }
     ],
-    "help": "SDK Version to use. If empty, use latest version."
-  },
-  {
-    "enablingConditions": [
+    "help": "SDK Version to use. If empty, use latest version.",
+    "valueValidators": [
       {
-        "paramName": "type",
-        "type": "EQUALS",
-        "paramValue": "initialize"
+        "type": "REGEX",
+        "args": [
+          "^(?:3\\.\\d+\\.\\d+|[4-9]\\d*\\.\\d+\\.\\d+|2\\.(?:[8-9]|\\d{2,})\\.\\d+|2\\.7\\.(?:[4-9]|\\d{2,}))$"
+        ]
       }
-    ],
-    "displayName": "Advanced Configurations",
-    "name": "initialize",
-    "type": "GROUP",
-    "subParams": [
-      {
-        "type": "TEXT",
-        "name": "sessionDuration",
-        "simpleValueType": true,
-        "help": "한 세션의 지속 시간을 설정합니다. 이 값은 최소 300 (5분) 이상이어야 합니다. default: 1800 (30분)",
-        "valueValidators": [],
-        "displayName": "sessionDuration"
-      },
-      {
-        "type": "GROUP",
-        "name": "pushSubscriptionOptions",
-        "displayName": "pushSubscriptionOptions",
-        "subParams": [
-          {
-            "type": "TEXT",
-            "name": "vapidPublicKey",
-            "displayName": "vapidPublicKey",
-            "simpleValueType": true
-          },
-          {
-            "type": "TEXT",
-            "name": "serviceWorkerPath",
-            "displayName": "serviceWorkerPath",
-            "simpleValueType": true
-          },
-          {
-            "type": "TEXT",
-            "name": "promptDelayMillis",
-            "displayName": "promptDelayMillis",
-            "simpleValueType": true,
-            "valueValidators": [],
-            "canBeEmptyString": true
-          },
-          {
-            "type": "CHECKBOX",
-            "name": "askPermission",
-            "checkboxText": "askPermission",
-            "simpleValueType": true
-          }
-        ],
-        "groupStyle": "ZIPPY_OPEN"
-      }
-    ],
-    "groupStyle": "ZIPPY_CLOSED"
+    ]
   },
   {
     "type": "TEXT",
@@ -390,7 +317,7 @@ const injectScript = require('injectScript');
 const log = require('logToConsole');
 
 const SDK_VERSION = data.version ? '@' + data.version : '';
-const JS_URL = 'https://cdn.jsdelivr.net/npm/notifly-js-sdk' + SDK_VERSION + '/dist/index.min.js';
+const JS_URL = 'https://cdn.jsdelivr.net/npm/notifly-js-sdk' + SDK_VERSION + '/dist/index.global.min.js';
 const LOG_PREFIX = '[Notifly / GTM] ';
 const NAMESPACE = 'notifly';
 
@@ -412,23 +339,21 @@ let _notifly;
 
 const onSuccess = () => {
   _notifly = copyFromWindow(NAMESPACE);
+  if (!_notifly) {
+    return onfailure();
+  }
+  
   switch (data.type) {
     case 'initialize':
       _notifly.initialize({
         projectId: data.projectId,
         username: data.username,
         password: data.password,
-        pushSubscriptionOptions: {
-          vapidPublicKey: data.vapidPublicKey && undefined,
-          promptDelayMillis: data.promptDelayMillis && undefined,
-          askPermission: data.askPermission && undefined,
-          serviceWorkerPath: data.serviceWorkerPath && undefined,
-        },
       });
       break;
     case 'setUserId':
       _notifly.getUserId.then((prev) => {
-        const current = data.userId;
+        const current = data.userId?.toString()?.trim() || null;
         if (!areUserIdsIdentical(prev, current)) {
           _notifly.setUserId(current);
         }
@@ -437,9 +362,6 @@ const onSuccess = () => {
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
       _notifly.setUserProperties(properties);
-      break;
-    case 'deleteUser':
-      _notifly.deleteUser();
       break;
     case 'trackEvent':
       const eventParams = (data.eventParams || []).reduce((current, params) => (current[params.name] = params.value, current), {});
