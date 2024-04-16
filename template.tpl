@@ -401,6 +401,13 @@ const fail = (msg) => {
 
 const getKeys = (keys) => keys.map((object) => object.key);
 
+const areUserIdsIdentical = (prev, current) => {
+  if (!prev && !current) {
+    return true;
+  }
+  return prev === current;
+}
+
 let _notifly;
 
 const onSuccess = () => {
@@ -420,7 +427,12 @@ const onSuccess = () => {
       });
       break;
     case 'setUserId':
-      _notifly.setUserId(data.userId);
+      _notifly.getUserId.then((prev) => {
+        const current = data.userId;
+        if (!areUserIdsIdentical(prev, current)) {
+          _notifly.setUserId(current);
+        }
+      })
       break;
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
