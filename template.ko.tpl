@@ -361,7 +361,7 @@ const onSuccess = () => {
       break;
     case 'setUserId':
       _notifly.getUserId().then((prev) => {
-        const current = data.userId?.toString()?.trim() || null;
+        const current = data.userId ? data.userId.toString().trim() : null;
         if (!areUserIdsIdentical(prev, current)) {
           _notifly.setUserId(current);
         }
