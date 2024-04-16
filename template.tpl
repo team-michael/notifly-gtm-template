@@ -333,7 +333,7 @@ const areUserIdsIdentical = (prev, current) => {
     return true;
   }
   return prev === current;
-}
+};
 
 let _notifly;
 
@@ -357,7 +357,7 @@ const onSuccess = () => {
         if (!areUserIdsIdentical(prev, current)) {
           _notifly.setUserId(current);
         }
-      })
+      });
       break;
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
