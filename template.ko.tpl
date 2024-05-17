@@ -363,8 +363,10 @@ const onSuccess = () => {
       _notifly.getUserId().then((prev) => {
         const current = data.userId ? data.userId.toString().trim() : null;
         if (!areUserIdsIdentical(prev, current)) {
-          _notifly.setUserId(current);
+          return _notifly.setUserId(current);
         }
+      }).then(() => {
+        data.gtmOnSuccess();
       });
       break;
     case 'setUserProperties':
