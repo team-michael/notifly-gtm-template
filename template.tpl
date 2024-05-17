@@ -352,12 +352,8 @@ const onSuccess = () => {
       });
       break;
     case 'setUserId':
-      _notifly.getUserId().then((prev) => {
         const current = data.userId ? data.userId.toString().trim() : null;
-        if (!areUserIdsIdentical(prev, current)) {
-          _notifly.setUserId(current);
-        }
-      });
+        _notifly.setUserId(current);
       break;
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
