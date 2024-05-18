@@ -328,13 +328,6 @@ const fail = (msg) => {
 
 const getKeys = (keys) => keys.map((object) => object.key);
 
-const areUserIdsIdentical = (prev, current) => {
-  if (!prev && !current) {
-    return true;
-  }
-  return prev === current;
-};
-
 let _notifly;
 
 const onSuccess = () => {
@@ -352,8 +345,8 @@ const onSuccess = () => {
       });
       break;
     case 'setUserId':
-        const current = data.userId ? data.userId.toString().trim() : null;
-        _notifly.setUserId(current);
+      const current = data.userId ? data.userId.toString().trim() : null;
+      _notifly.setUserId(current, { onlyIfChanged: true });
       break;
     case 'setUserProperties':
       const properties = (data.userProperties || []).reduce((current, props) => (current[props.name] = props.value, current), {});
